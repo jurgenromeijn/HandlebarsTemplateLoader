@@ -1,19 +1,20 @@
 /**
  * A simple component that loads and complies Handlebars templates.
  */
-var HandlebarsTemplateLoader = function(templateNames, templateDirectory, fileExtension) {
-	var _templateDirectory = "js/template",
+ function HandlebarsTemplateLoader(templateNames, templateDirectory, fileExtension) {
+	'use strict';
+	var _templateDirectory = 'js/template',
 		_templates = [],
-		_fileExtension = "handlebars",
+		_fileExtension = 'handlebars',
 		_this = this;
 
 	/**
 	 * Setup all configuration options.
 	 */
 	function init(templateDirectory, templateNames) {
-		if (fileExtension != undefined) _fileExtension = fileExtension;
-		if (templateDirectory != undefined) _templateDirectory = templateDirectory;
-		if (templateNames != undefined) _this.loadTemplates(templateNames);
+		if (fileExtension !== undefined) _fileExtension = fileExtension;
+		if (templateDirectory !== undefined) _templateDirectory = templateDirectory;
+		if (templateNames !== undefined) _this.loadTemplates(templateNames);
 	}
 
 	/**
@@ -38,7 +39,7 @@ var HandlebarsTemplateLoader = function(templateNames, templateDirectory, fileEx
 		$.ajax(this.createUrl(templateName))
 			.done(function(data) {
 				_templates[templateName] = Handlebars.compile(data);
-				if (callback != undefined) callback(_templates[templateName]);
+				if (callback !== undefined) callback(_templates[templateName]);
 			})
 			.fail(function() {
 				_templates[templateName] = null;
@@ -49,14 +50,14 @@ var HandlebarsTemplateLoader = function(templateNames, templateDirectory, fileEx
 	 * Create a url for a template based on the configurations that have been given to this object.
 	 */
 	this.createUrl = function(templateName) {
-		return _templateDirectory + "/" + templateName + "." + _fileExtension;
+		return _templateDirectory + '/' + templateName + '.' + _fileExtension;
 	};
 
 	/**
 	 * Get a template or load if we don't have it yet.
 	 */
 	this.getTemplate = function(templateName, callback) {
-		if (_templates[templateName] != undefined) {
+		if (_templates[templateName] !== undefined) {
 			callback(_templates[templateName]);
 		} else {
 			this.loadTemplate(templateName, callback);
@@ -64,4 +65,4 @@ var HandlebarsTemplateLoader = function(templateNames, templateDirectory, fileEx
 	};
 
 	init(templateDirectory, templateNames);
-};
+}
