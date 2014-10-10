@@ -1,5 +1,5 @@
 /**
- * A simple component that loads and complies Handlebars templates.
+ * A simple component that loads and compiles Handlebars templates.
  */
  function HandlebarsTemplateLoader(templateNames, templateDirectory, fileExtension) {
 	'use strict';
